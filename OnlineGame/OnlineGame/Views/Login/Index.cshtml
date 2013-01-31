@@ -1,0 +1,30 @@
+﻿@model OnlineGame.Models.LoginViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm("Login", "Login"))
+{
+
+    <table>
+        <tr>
+            <td>
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Login" />
+            </td>
+        </tr>
+    </table>
+}
+
+

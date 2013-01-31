@@ -1,0 +1,62 @@
+﻿body
+{
+    font-family: Verdana, Arial, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    font-size: 1em;
+    background-color: #FFF;
+}
+
+p
+{
+    font-size: 0.6em;
+}
+
+h1, h2, h3, h4
+{
+    font-family: Arial, Verdana, sans-serif;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+h1
+{
+    font-size: 1.2em;
+}
+
+h2
+{
+    font-size: 1.0em;
+}
+
+h3
+{
+    font-size: 0.8em;
+}
+
+header
+{
+    height: 40px;
+    background-color: #000;
+    margin: 0px;
+    padding: 0px;
+}
+
+footer
+{
+    min-height: 100px !important;
+    min-width: 100%;
+    background-color: #0094ff;
+    margin: 0px;
+    padding: 0px;
+}
+
+.content-wrapper
+{
+    width: 100%;
+    min-height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFF;
+}
+

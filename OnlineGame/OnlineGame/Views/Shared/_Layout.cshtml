@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                ResizeContent();
+
+                $(window).resize(function () {
+                    ResizeContent();
+                });
+            });
+
+            function ResizeContent() {
+                $("#content").css("min-height", $(window).height() - 160 + "px");
+            }
+        </script>
+    </head>
+    <body>
+        <header>
+        </header>
+        <div id="content" class="content-wrapper">
+            @RenderBody()
+        </div>
+        <footer>
+
+        </footer>
+    </body>
+</html>

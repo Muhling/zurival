@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="OnlineGame" Class="OnlineGameDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=MIKAEL;Initial Catalog=OnlineGame;Integrated Security=True" SettingsObjectName="Models.Properties.Settings" SettingsPropertyName="OnlineGameConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Verified" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Salt" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Maps" Member="Maps">
+    <Type Name="Map">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NrOfBlocks" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Map_MapTileBlock" Member="MapTileBlocks" ThisKey="Id" OtherKey="MapId" Type="MapTileBlock" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MapTileBlocks" Member="MapTileBlocks">
+    <Type Name="MapTileBlock">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PositionIndex" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MapId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MapTileBlock_MapTile" Member="MapTiles" ThisKey="Id" OtherKey="MapTileBlockId" Type="MapTile" />
+      <Association Name="Map_MapTileBlock" Member="Map" ThisKey="MapId" OtherKey="Id" Type="Map" IsForeignKey="true" />
+      <Association Name="MapTileBlockType_MapTileBlock" Member="MapTileBlockType" ThisKey="TypeId" OtherKey="Id" Type="MapTileBlockType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MapTileBlockTypes" Member="MapTileBlockTypes">
+    <Type Name="MapTileBlockType">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="MapTileBlockType_MapTileBlock" Member="MapTileBlocks" ThisKey="Id" OtherKey="TypeId" Type="MapTileBlock" />
+      <Association Name="MapTileBlockType_MapTileType" Member="MapTileTypes" ThisKey="Id" OtherKey="BlockTypeId" Type="MapTileType" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MapTiles" Member="MapTiles">
+    <Type Name="MapTile">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="X" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Y" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Width" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Height" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MapTileBlockId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MapTileBlock_MapTile" Member="MapTileBlock" ThisKey="MapTileBlockId" OtherKey="Id" Type="MapTileBlock" IsForeignKey="true" />
+      <Association Name="MapTileType_MapTile" Member="MapTileType" ThisKey="TypeId" OtherKey="Id" Type="MapTileType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MapTileTypes" Member="MapTileTypes">
+    <Type Name="MapTileType">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MovementAllowed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Background" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="BlockTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MapTileType_MapTile" Member="MapTiles" ThisKey="Id" OtherKey="TypeId" Type="MapTile" />
+      <Association Name="MapTileBlockType_MapTileType" Member="MapTileBlockType" ThisKey="BlockTypeId" OtherKey="Id" Type="MapTileBlockType" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
